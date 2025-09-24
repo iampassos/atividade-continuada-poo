@@ -23,15 +23,20 @@ public class OrdemServico {
         return dataHoraAbertura.toLocalDate().plusDays(prazoEmDias);
     }
 
-    // Ficou confuso...
     public String getNumero() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        String formatted = dataHoraAbertura.format(formatter);
+        StringBuilder temp = new StringBuilder();
 
-        if (cliente.getCpfCnpj().length() == 14) {
-            formatted = formatted + "000";
+        temp.append(notebook != null ? notebook.getIdTipo() : desktop.getIdTipo());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+        temp.append(dataHoraAbertura.format(formatter));
+
+        if (cliente.getCpfCnpj().length() <= 11) {
+            temp.append("000");
         }
 
-        return formatted + cliente.getCpfCnpj();
+        temp.append(cliente.getCpfCnpj());
+
+        return temp.toString();
     }
 }
