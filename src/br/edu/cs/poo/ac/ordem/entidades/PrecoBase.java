@@ -32,7 +32,7 @@ public enum PrecoBase {
 
     public static PrecoBase getPrecoBase(TipoOrdem tipoOrdem, Dificuldade dificuldade) {
         for (PrecoBase p : PrecoBase.values()) {
-            if (p.getTipoOrdem().equals(tipoOrdem) && p.getDificuldade().equals(dificuldade)) {
+            if (p.getTipoOrdem() == tipoOrdem && p.getDificuldade() == dificuldade) {
                 return p;
             }
         }
