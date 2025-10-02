@@ -29,7 +29,7 @@ public class ClienteMediator {
             return resultado;
         }
 
-        Cliente existe = clienteDAO.buscar(cliente.getCpfCnpj());
+        Cliente existe = buscar(cliente.getCpfCnpj());
         if (existe != null) {
             resultado.getMensagensErro().adicionar("CPF/CNPJ já existente");
             return resultado;
@@ -46,7 +46,7 @@ public class ClienteMediator {
             return resultado;
         }
 
-        Cliente existe = clienteDAO.buscar(cliente.getCpfCnpj());
+        Cliente existe = buscar(cliente.getCpfCnpj());
         if (existe == null) {
             resultado.getMensagensErro().adicionar("CPF/CNPJ inexistente");
             return resultado;
@@ -64,7 +64,7 @@ public class ClienteMediator {
             return new ResultadoMediator(false, false, lista);
         }
 
-        Cliente existe = clienteDAO.buscar(cpfCnpj);
+        Cliente existe = buscar(cpfCnpj);
         if (existe == null) {
             lista.adicionar("CPF/CNPJ inexistente");
             return new ResultadoMediator(true, false, lista);
@@ -75,11 +75,7 @@ public class ClienteMediator {
     }
 
     public Cliente buscar(String cpfCnpj) {
-        if (StringUtils.estaVazia(cpfCnpj)) {
-            return null;
-        }
-
-        return clienteDAO.buscar(cpfCnpj);
+        return StringUtils.estaVazia(cpfCnpj) ? null : clienteDAO.buscar(cpfCnpj);
     }
 
     public ResultadoMediator validar(Cliente cliente) {
